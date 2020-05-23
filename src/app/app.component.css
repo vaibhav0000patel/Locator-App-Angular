@@ -1,0 +1,16 @@
+div {
+  text-align: center;
+}
+
+agm-map {
+  height: 300px;
+}
+
+.row {
+  margin: 20px 0px;
+  text-align: left;
+}
+
+button {
+  margin: 5px;
+}

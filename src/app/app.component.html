@@ -1,0 +1,85 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<h1 style="text-align:center;">
+  Welcome to {{ title }}!
+</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6">
+      <label for="inputState">States </label>
+      <select
+        name="inputState"
+        id="inputState"
+        class="form-control"
+        [(ngModel)]="inputState"
+        (ngModelChange)="getDistricts($event)"
+        [disabled]="isDisabled"
+      >
+        <option *ngFor="let state of states" [value]="state">{{state}}</option>
+      </select>
+    </div>
+    <div class="col-lg-6">
+        <label for="inputDistrict">Districts </label>
+        <select
+          name="inputDistrict"
+          id="inputDistrict"
+          class="form-control"
+          [(ngModel)]="inputDistrict"
+          (ngModelChange)="getCities($event)"
+          [disabled]="isDisabled"
+        >
+          <option *ngFor="let district of districts" [value]="district">{{district}}</option>
+        </select>
+      </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6 col-md-12">
+      <span *ngFor = "let city of cities">
+      <button
+        class="btn btn-primary"
+        (click)="geLocationOnChange(city)"
+        [disabled]="isDisabled"
+      >
+        {{ city }}
+      </button>
+    </span>
+    </div>
+
+    <div class="col-lg-6 col-md-12">
+      <div class="form-group">
+        <label>Enter address</label>
+        <input
+          type="text"
+          class="form-control"
+          (keydown.enter)="$event.preventDefault()"
+          placeholder="Search Nearest Location"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="off"
+          type="text"
+          #search
+          [disabled]="isDisabled"
+        />
+      </div>
+
+      <agm-map
+        [latitude]="lat"
+        [longitude]="lng"
+        [disableDefaultUI]="false"
+        [zoomControl]="false"
+      >
+        <agm-marker
+          [latitude]="lat"
+          [longitude]="lng"
+          [label]="label"
+          [markerDraggable]="draggable"
+        >
+          <agm-info-window>
+            <strong>InfoWindow content</strong>
+          </agm-info-window>
+        </agm-marker>
+      </agm-map>
+    </div>
+  </div>
+</div>
